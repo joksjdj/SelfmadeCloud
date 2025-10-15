@@ -4,7 +4,7 @@ import os
 
 HOST = ''  # listen on all interfaces
 PORT = 5001
-FOLDER_TO_SEND = "cloud"
+FOLDER_TO_SEND = "Cloud_server"
 ZIP_NAME = FOLDER_TO_SEND + ".zip"
 
 # Step 1: Zip the folder
