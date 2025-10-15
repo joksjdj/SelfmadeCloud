@@ -35,8 +35,15 @@ FOLDER = "Cloud"
 # Function to compute hash of a normal file
 # Function to compute hash of a normal file
 def file_hash(path):
+    """
+    Compute SHA-256 hash of a file at 'path'.
+    Handles Windows and Linux paths correctly.
+    """
+    # Normalize path to remove duplicate separators
+    normalized_path = os.path.normpath(path)
+    
     h = hashlib.sha256()
-    with open(path, "rb") as f:
+    with open(normalized_path, "rb") as f:
         for chunk in iter(lambda: f.read(4096), b""):
             h.update(chunk)
     return h.hexdigest()
