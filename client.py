@@ -27,78 +27,17 @@ with open(OUTPUT_ZIP, "wb") as f:
         f.write(data)
         received += len(data)
 
+print("File received. Extracting...")
 
-# =================================================================
-
-ZIP_FILE = "received_folder.zip"
-FOLDER = "Cloud"
-# Function to compute hash of a normal file
-# Function to compute hash of a normal file
-def file_hash(path):
-    """
-    Compute SHA-256 hash of a file at 'path'.
-    Handles Windows and Linux paths correctly.
-    """
-    # Normalize path to remove duplicate separators
-    normalized_path = os.path.normpath(path)
+# Unzip the folder
+with zipfile.ZipFile(OUTPUT_ZIP, 'r') as zip_ref:
+    zip_ref.extractall("Cloud")
     
-    h = hashlib.sha256()
-    with open(normalized_path, "rb") as f:
-        for chunk in iter(lambda: f.read(4096), b""):
-            h.update(chunk)
-    return h.hexdigest()
-
-# Function to compute hash of a file inside a ZIP
-def zip_file_hash(zip_ref, name):
-    h = hashlib.sha256()
-    with zip_ref.open(name) as f:
-        for chunk in iter(lambda: f.read(4096), b""):
-            h.update(chunk)
-    return h.hexdigest()
-
-# Function to extract a file from ZIP to folder
-def extract_file(zip_ref, name, folder_path):
-    # Remove leading slashes from ZIP name to avoid duplicated separators
-    clean_name = name.lstrip("/\\")
-    # Join with folder path
-    dest_path = os.path.join(FOLDER, *clean_name.split("/"))
-    os.makedirs(os.path.dirname(dest_path), exist_ok=True)
-    with zip_ref.open(name) as src, open(dest_path, "wb") as dst:
-        for chunk in iter(lambda: src.read(4096), b""):
-            dst.write(chunk)
-    print(f"✅ Updated: {clean_name}")
-
-# =======================
-# Sync folder with ZIP
-# =======================
-with zipfile.ZipFile(ZIP_FILE, 'r') as zip_ref:
-    zip_files = zip_ref.namelist()
-
-    # Replace missing or different files
-    for name in zip_files:
-        folder_path = os.path.join(FOLDER, name.replace("/", os.sep))
-        replace = False
-
-        if os.path.exists(folder_path):
-            zip_h = zip_file_hash(zip_ref, name)
-            folder_h = file_hash(folder_path)
-            if zip_h != folder_h:
-                replace = True
-        else:
-            replace = True
-
-        if replace:
-            extract_file(zip_ref, name, folder_path)
-
-print("✅ Folder synchronized with ZIP.")
-
 if os.path.exists(OUTPUT_ZIP):
     os.remove(OUTPUT_ZIP)
     print(f"Deleted file: {OUTPUT_ZIP}")
 else:
     print("File not found.")
-
-# ==================================================================
 
 FOLDER_TO_WATCH = "Cloud"
 
