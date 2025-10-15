@@ -51,12 +51,15 @@ def zip_file_hash(zip_ref, name):
 
 # Function to extract a file from ZIP to folder
 def extract_file(zip_ref, name, folder_path):
-    dest_path = os.path.join(FOLDER, name.replace("/", os.sep))
+    # Remove leading slashes from ZIP name to avoid duplicated separators
+    clean_name = name.lstrip("/\\")
+    # Join with folder path
+    dest_path = os.path.join(FOLDER, *clean_name.split("/"))
     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
     with zip_ref.open(name) as src, open(dest_path, "wb") as dst:
         for chunk in iter(lambda: src.read(4096), b""):
             dst.write(chunk)
-    print(f"✅ Updated: {name}")
+    print(f"✅ Updated: {clean_name}")
 
 # =======================
 # Sync folder with ZIP
