@@ -17,15 +17,6 @@ from PyQt5.QtCore import QUrl
 from PyQt5.QtWidgets import QSplitter
 from PyQt5.QtCore import Qt
 
-def get_secrets(requested_key):
-    try:
-        with open("secrets.json", "r") as f:
-            data = json.load(f)
-        key = data["user"][requested_key]
-        return key
-    except FileNotFoundError:
-        return "couldnt find secrets.json"
-
 class FileExplorer(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -71,8 +62,7 @@ class FileExplorer(QMainWindow):
 
 
         # File system model
-        user = get_secrets("user")
-        path = r'C:/Users/' + user
+        path = os.path.abspath("Cloud")
         self.model = QFileSystemModel()
         self.model.setReadOnly(False)
         self.model.setRootPath(path)

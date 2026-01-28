@@ -1,0 +1,1 @@
+C:\Users\Alexander\Downloads\SelfmadeCloud\folder_watcher\target\debug\libhello_rust.rlib: C:\Users\Alexander\Downloads\SelfmadeCloud\folder_watcher\src\lib.rs C:\Users\Alexander\Downloads\SelfmadeCloud\folder_watcher\src\watcher.rs

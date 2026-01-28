@@ -1,0 +1,1 @@
+C:\Users\Alexander\Downloads\SelfmadeCloud\folder_watcher\target\debug\hello_rust.exe: C:\Users\Alexander\Downloads\SelfmadeCloud\folder_watcher\src\lib.rs C:\Users\Alexander\Downloads\SelfmadeCloud\folder_watcher\src\main.rs C:\Users\Alexander\Downloads\SelfmadeCloud\folder_watcher\src\watcher.rs
