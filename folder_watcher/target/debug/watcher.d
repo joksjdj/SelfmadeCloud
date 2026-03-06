@@ -1,1 +1,1 @@
-C:\Users\Alexander\Downloads\SelfmadeCloud\folder_watcher\target\debug\watcher.exe: C:\Users\Alexander\Downloads\SelfmadeCloud\folder_watcher\src\lib.rs C:\Users\Alexander\Downloads\SelfmadeCloud\folder_watcher\src\main.rs
+/home/alexanderto/Documents/GitHub/SelfmadeCloud/folder_watcher/target/debug/watcher: /home/alexanderto/Documents/GitHub/SelfmadeCloud/folder_watcher/src/lib.rs /home/alexanderto/Documents/GitHub/SelfmadeCloud/folder_watcher/src/main.rs

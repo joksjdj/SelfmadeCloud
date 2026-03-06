@@ -1,5 +1,5 @@
 use colored::*;
-use std::time::Instant;
+use std::fs;
 
 pub struct Time;
 impl Time {
@@ -16,4 +16,12 @@ impl Time {
 
 pub fn print_test(text: &str) {
     println!("\n{}", text.to_string().purple());
+}
+
+pub fn check_files() {
+    let look_files = fs::read_dir("data/cloud/files").unwrap();
+
+    for files in look_files {
+        println!("Name: {}", files.unwrap().path().display());
+    }
 }
